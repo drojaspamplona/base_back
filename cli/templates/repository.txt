@@ -1,0 +1,6 @@
+from repository import BaseRepository
+
+
+class {{ class_name }}Repository(BaseRepository):
+    def __init__(self):
+        super().__init__("{{ schema }}", "{{ entity }}", "{{ entity }}_id")

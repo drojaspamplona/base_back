@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+.vscode
+resources/reports/*.xlsx
+resources/reports/*.pdf
+# Elastic Beanstalk Files
+
+# VS
+/.vscode
+.env
+
+.idea

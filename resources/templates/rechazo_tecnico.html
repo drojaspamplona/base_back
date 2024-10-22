@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba/title>
+    <style>
+        body {
+            font-weight: normal;
+            font-size: 13px;
+            min-height: 100%;
+            top: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+        }
+
+        table, th, td {
+            border: 1px solid #212121;
+            font-size: 13px;
+        }
+
+
+        .table td, .table th {
+            padding: .65rem;
+        }
+
+        label {
+            font-size: 15px;
+            width: 190px;
+            display: inline-block;
+            padding: 4px 0px 0px 0px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        footer,
+        section#main,
+        body {
+            width: 100%;
+            position: absolute;
+        }
+
+        section {
+            color: #000;
+        }
+
+        div {
+            padding: 10px 10px 10px 10px;
+        }
+
+        .first-td {
+            width: 200px;
+            color: white;
+            background-color: #003850;
+        }
+
+        h6 {
+            color: #757575;
+        }
+
+
+    </style>
+</head>
+<body>
+<section>
+    <div style="margin:auto; width:50%;">
+
+        <h1>Se ha rechazado técnicamente la cotización</h1>
+        <table class="table">
+            <tr>
+                <td class="first-td"><label>Consecutivo de la cotización </label></td>
+                <td><span>{{ model.Consecutive }}</span></td>
+            </tr>
+            <tr>
+                <td class="first-td"><label>Código del producto: </label></td>
+                <td><span>{{ model.Code }}</span></td>
+            </tr>
+            <tr>
+                <td class="first-td"><label>Cliente: </label></td>
+                <td><span>{{ model.ClientName }}</span></td>
+            </tr>
+            <tr>
+                <td class="first-td"><label>Dosis: </label></td>
+                <td><span class="text-center">{{ "{:,.2f}".format(model.Dosage) }} Kg</span></td>
+            </tr>
+            <tr>
+                <td class="first-td"><label>Estado</label></td>
+                <td><span>Rechazada</span></td>
+            </tr>
+        </table>
+        <h6>Este es un mensaje generado automáticamente, por favor no responda al mismo.</h6>
+    </div>
+</section>
+</body>
+</html>

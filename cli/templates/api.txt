@@ -1,0 +1,28 @@
+from domain.models.{{ schema }} import {{ modelClassName }}
+from infrastructure.utils.auth import get_current_user
+from domain.services.{{ schema }} import {{ serviceClassName }}
+from fastapi import APIRouter, Depends
+from domain.models import User
+from typing import List
+
+router = APIRouter()
+
+
+@router.get("/get_all", response_model=List[{{ modelClassName }}])
+async def get_all(u: User = Depends(get_current_user)):
+    return {{ serviceClassName }}().get_all()
+
+
+@router.post("/create", response_model=int)
+async def create(request: {{ modelClassName }}, u: User = Depends(get_current_user)):
+    return {{ serviceClassName }}().create(request)
+
+
+@router.post("/update", response_model=bool)
+async def update(request: {{ modelClassName }}, u: User = Depends(get_current_user)):
+    return {{ serviceClassName }}().update(request)
+
+
+@router.get("/get_by_id/{id}", response_model={{ modelClassName }})
+async def get_{{ name }}_by_id(id: int, u: User = Depends(get_current_user)):
+    return {{ serviceClassName }}().get_by_id(id)

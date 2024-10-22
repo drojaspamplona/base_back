@@ -1,0 +1,15 @@
+from typing import Dict
+
+from domain.models.{{ schema }} import {{ class_name }}Model
+from domain.services import BaseService
+from repository import BaseRepository
+{% if not no_repo %}from repository.{{ schema }} import {{ class_name }}Repository{% endif %}
+
+
+class {{ class_name }}Service(BaseService[{{ class_name }}Model, {% if no_repo %}None{% endif %}{% if not no_repo %}{{ class_name }}Repository{% endif %}]):
+    def __init__(self):
+        super().__init__({% if no_repo %}BaseRepository("{{ schema }}", "{{ entity }}", "{{ entity }}_id"){% endif %}{% if not no_repo %}{{ class_name }}Repository(){% endif %})
+
+    def __parse__(self, record: Dict) -> {{ class_name }}Model:
+        return {{ class_name }}Model.parse_obj(record)
+

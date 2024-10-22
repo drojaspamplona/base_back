@@ -1,0 +1,11 @@
+from pydantic import BaseModel
+{%- for d in dependencies %}
+{{ d }}
+{%- endfor %}
+
+
+class {{ class_name }}Model(BaseModel):
+    {%- for c in columns %}
+    {{ c.column_name }}: {{c.data_type}}
+    {%- endfor %}
+    

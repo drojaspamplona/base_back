@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+    jira: circleci/jira@1.3.1
+    aws-ecr: circleci/aws-ecr@8.1.2
+jobs:
+    update-instance:
+        docker:
+            -   image: python:3.9-buster
+        steps:
+            - checkout
+            -   run:
+                    name: Install dependencies
+                    command: pip install boto3
+            -   run:
+                    name: Remove running instances
+                    command: python3 .circleci/clear_tasks.py $CIRCLE_BRANCH
+
+workflows:
+    build-and-deploy:
+        jobs:
+            -   aws-ecr/build-and-push-image:
+                    repo: "base-back-${CIRCLE_BRANCH}"
+                    tag: "latest,${CIRCLE_SHA1}"
+                    filters:
+                        branches:
+                            only:
+                                - develop
+                                - staging
+                                - master
+            -   update-instance:
+                    requires:
+                        - aws-ecr/build-and-push-image
+                    post-steps:
+                        -   jira/notify:
+                                job_type: deployment
+                    filters:
+                        branches:
+                            only:
+                                - develop
+                                - staging
+                                - master
